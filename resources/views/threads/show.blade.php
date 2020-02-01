@@ -8,13 +8,27 @@
                     <div class="card-header">Dashboard</div>
 
                     <div class="card-body p-4 mb-4">
-                            <article class="mb-4">
-                                <h4>{{$thread->title}}</h4>
-                                <div class="body">
-                                    {{$thread->body}}
-                                </div>
-                            </article>
+                        <article class="mb-4">
+                            <h4>{{$thread->title}}</h4>
+                            <div class="body">
+                                {{$thread->body}}
+                            </div>
+                        </article>
                     </div>
+
+                    @foreach($thread->replies as $reply)
+                            <div class="card mb-4">
+                                <div class="card-header"><span><a href="">{{$reply->owner->name}}</a> said </span>
+                                    {{$reply->created_at->diffForHumans()}}...</div>
+                                <div class="card-body p-4 mb-4">
+                                    <article class="mb-4">
+                                        <div class="body">
+                                            {{$reply->body}}
+                                        </div>
+                                    </article>
+                                </div>
+                            </div>
+                    @endforeach
                 </div>
             </div>
         </div>
