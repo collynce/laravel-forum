@@ -9,6 +9,7 @@
 
                     <div class="card-body p-4 mb-4">
                         <article class="mb-4">
+                            <a href="">{{$thread->creator->name}}</a> posted:
                             <h4>{{$thread->title}}</h4>
                             <div class="body">
                                 {{$thread->body}}
@@ -20,13 +21,7 @@
                             <div class="card mb-4">
                                 <div class="card-header"><span><a href="">{{$reply->owner->name}}</a> said </span>
                                     {{$reply->created_at->diffForHumans()}}...</div>
-                                <div class="card-body p-4 mb-4">
-                                    <article class="mb-4">
-                                        <div class="body">
-                                            {{$reply->body}}
-                                        </div>
-                                    </article>
-                                </div>
+                                @include('threads.reply')
                             </div>
                     @endforeach
                 </div>
