@@ -9,7 +9,7 @@
                     <form action="/replies/{{$reply->id}}/favorites" method="post">
                         @csrf
                         <button class="flex justify-content-end" {{$reply->isFavorited()?'disabled':''}}>
-                            {{$reply->favorites()->count()}}{{Str::plural('Favorites'.$reply->favorites()->count())}}
+                            {{$reply->favorites_count}}{{Str::plural('Favorites'.$reply->favorites_count)}}
                         </button>
                     </form>
                 </div>

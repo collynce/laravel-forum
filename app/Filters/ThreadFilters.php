@@ -17,6 +17,10 @@ class ThreadFilters
 
     protected $builder;
 
+    public function apply($query)
+    {
+    }
+
     /**
      * Filter the query by a given username.
      *

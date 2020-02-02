@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class Filters
 {
 
+
     protected $request;
 
     protected $builder;
@@ -32,6 +33,7 @@ class Filters
 
         return $this->builder;
     }
+
 
     public function getFilters()
     {
