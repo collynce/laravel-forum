@@ -14,6 +14,9 @@
                                     <a href="{{$thread->path()}}">
                                         {{$thread->title}}
                                     </a>
+                                    <a href="{{$thread->path()}}">
+                                        {{ $thread->replies_count }} {{ Str::plural('reply', $thread->replies_count) }}
+                                    </a>
                                 </h4>
                                 <div class="body">
                                     {{$thread->body}}
