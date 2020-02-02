@@ -14,10 +14,23 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/threads', 'ThreadController@index');
-Route::get('/threads/{thread}', 'ThreadController@show');
+Auth::routes();
+Route::get('/home', 'HomeController@index');
+Route::get('threads', 'ThreadController@index');
+Route::get('threads/create', 'ThreadController@create');
+Route::get('threads/{channel}/{thread}', 'ThreadController@show');
+Route::delete('threads/{channel}/{thread}', 'ThreadController@destroy');
+Route::post('threads', 'ThreadController@store');
+Route::get('threads/{channel}', 'ThreadController@index');
+Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
+Route::delete('/replies/{reply}', 'RepliesController@destroy');
+Route::post('/replies/{reply}/favorites', 'FavoritesController@store');
+Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/threads/{thread}/replies', 'RepliesController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
