@@ -8,7 +8,7 @@
                     <div class="card-header">Dashboard</div>
 
                     <div class="card-body p-4 mb-4">
-                        @foreach($threads as $thread)
+                        @forelse ($threads as $thread)
                             <article class="mb-4">
                                 <h4>
                                     <a href="{{$thread->path()}}">
@@ -22,7 +22,9 @@
                                     {{$thread->body}}
                                 </div>
                             </article>
-                        @endforeach
+                        @empty
+                            <p>There are no relevant results at this time.</p>
+                        @endforelse
                     </div>
                 </div>
             </div>

@@ -8,12 +8,20 @@
                     <div class="card-header">
                         <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a> posted:
                         {{ $thread->title }}
+                        <div class="flex">
+                            @can ('update', $thread)
+                                <form action="{{ $thread->path() }}" method="POST">
+                                    @csrf
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" class="btn btn-link">Delete Thread</button>
+                                </form>
+                            @endcan
+                        </div>
                     </div>
 
                     <div class="card-body">
                         {{ $thread->body }}
                     </div>
-
 
 
                 </div>
@@ -26,7 +34,6 @@
                     </div>
                     <hr>
                 </div>
-
 
 
                 {{ $replies->links() }}
