@@ -1,8 +1,7 @@
 <div class="card-body p-4 mb-4">
     <article class="mb-4">
         <div class="body">
-            <div>
-                <a href="{{ route('profile', $reply->owner) }}">
+            <div  id="reply-{{ $reply->id }}">
                 <a href="#">{{ $reply->owner->name }}</a>
                 {{$reply->body}}
                 <div>
