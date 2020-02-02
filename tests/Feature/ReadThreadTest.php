@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class ReadThreadTest extends TestCase
 {
-    use DatabaseMigrations, RefreshDatabase;
+    use DatabaseMigrations;
 
     protected $thread;
 
@@ -52,5 +52,18 @@ class ReadThreadTest extends TestCase
         $this->get('/threads/' . $channel->slug)
             ->assertSee($threadInChannel->title)
             ->assertDontSee($threadNotInChannel->title);
+    }
+
+    /** @test */
+    function a_user_can_filter_threads_by_any_username()
+    {
+        $this->signIn(create('App\User', ['name' => 'JohnDoe']));
+
+        $threadByJohn = create('App\Thread', ['user_id' => auth()->id()]);
+        $threadNotByJohn = create('App\Thread');
+
+        $this->get('threads?by=JohnDoe')
+            ->assertSee($threadByJohn->title)
+            ->assertDontSee($threadNotByJohn->title);
     }
 }
