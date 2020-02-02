@@ -6,6 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Dashboard</div>
+                    <flash message="{{ session('flash') }}"></flash>
 
                     <div class="card-body p-4 mb-4">
                         @forelse ($threads as $thread)
