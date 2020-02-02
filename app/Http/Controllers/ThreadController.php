@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Channel;
+use App\Filters\ThreadFilters;
 use App\Thread;
 use Illuminate\Http\Request;
-use App\Filters\ThreadFilters;
 
 class ThreadController extends Controller
 {
@@ -44,7 +44,7 @@ class ThreadController extends Controller
     {
         $this->validate($request, [
             'title' => 'required',
-            'body'  => 'required',
+            'body' => 'required',
             'channel_id' => 'required|exists:channels,id'
         ]);
 
@@ -52,7 +52,7 @@ class ThreadController extends Controller
             'user_id' => auth()->id(),
             'channel_id' => request('channel_id'),
             'title' => request('title'),
-            'body'  => request('body')
+            'body' => request('body')
         ]);
 
         return redirect($thread->path());
@@ -61,10 +61,10 @@ class ThreadController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Thread  $thread
+     * @param \App\Thread $thread
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($channelId, Thread $thread)
+    public function show($channel, Thread $thread)
     {
         return view('threads.show', [
             'thread' => $thread,
@@ -75,7 +75,7 @@ class ThreadController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Thread  $thread
+     * @param \App\Thread $thread
      * @return \Illuminate\Http\Response
      */
     public function edit(Thread $thread)
@@ -86,8 +86,8 @@ class ThreadController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Thread  $thread
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Thread $thread
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Thread $thread)
@@ -95,15 +95,15 @@ class ThreadController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Thread  $thread
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Thread $thread)
+
+    public function destroy($channel, Thread $thread)
     {
-        //
+        $thread->replies()->delete();
+        $thread->delete();
+        if (request()->wantsJson()) {
+            return response([], 204);
+        }
+        return redirect('/threads');
     }
 
     /**
