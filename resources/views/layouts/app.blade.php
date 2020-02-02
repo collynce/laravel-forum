@@ -35,8 +35,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <li><a href="/threads">All Threads</a></li>
-                    <li class="dropdown">
+                    <li class="nav-item"><a href="/threads">All Threads</a></li>
+                    <li class="nav-item">
+                        <a href="/threads/create">New Thread</a>
+                    </li>
+                    <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Channels <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -45,6 +48,7 @@
                             @endforeach
                         </ul>
                     </li>
+
                 </ul>
 
 
