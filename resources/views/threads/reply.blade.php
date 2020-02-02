@@ -2,6 +2,7 @@
     <article class="mb-4">
         <div class="body">
             <div>
+                <a href="{{ route('profile', $reply->owner) }}">
                 <a href="#">{{ $reply->owner->name }}</a>
                 {{$reply->body}}
                 <div>
