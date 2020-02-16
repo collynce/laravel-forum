@@ -2,8 +2,23 @@ require('./bootstrap');
 
 import Vue from 'vue'
 
+window.axios = require('axios');
+
+window.axios.defaults.headers.common = {
+    'X-CSRF-TOKEN': window.App.csrfToken,
+    'X-Requested-With': 'XMLHttpRequest'
+};
+
 Vue.component('flash', require('./components/Flash.vue').default);
-Vue.component('reply', require('./components/Reply.vue').default);
+Vue.component('thread-view', require('./components/pages/Thread.vue').default);
+Vue.component('replies', require('./components/Replies').default);
+
+
+Vue.prototype.authorize = function (handler) {
+    let user = window.App.user;
+
+    return user ? handler(user) : false;
+};
 
 window.events = new Vue();
 
