@@ -3,6 +3,7 @@ require('./bootstrap');
 import Vue from 'vue'
 
 Vue.component('flash', require('./components/Flash.vue').default);
+Vue.component('reply', require('./components/Reply.vue').default);
 
 window.events = new Vue();
 
