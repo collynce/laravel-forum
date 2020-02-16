@@ -1983,6 +1983,12 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.editing = false;
       flash('Updated!');
+    },
+    destroy: function destroy() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]('/replies/' + this.attributes.id);
+      $(this.$el).fadeOut(300, function () {
+        flash('Your reply has been deleted.');
+      });
     }
   }
 });
