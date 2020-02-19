@@ -50,7 +50,7 @@
                                     <li><a href="/threads?by={{ auth()->user()->name }}">My Threads</a></li>
                                 @endif
                                 <li><a href="/threads?popular=1">Popular Threads</a></li>
-
+                                <li><a href="/threads?unanswered=1">Unanswered Threads</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
