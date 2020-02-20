@@ -13,6 +13,7 @@ Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('thread-view', require('./components/pages/Thread.vue').default);
 Vue.component('replies', require('./components/Replies').default);
 Vue.component('paginator', require('./components/Paginator.vue').default);
+Vue.component('subscribe-button', require('./components/SubscribeButton').default);
 
 Vue.prototype.authorize = function (handler) {
     let user = window.App.user;
