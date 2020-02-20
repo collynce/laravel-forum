@@ -17,7 +17,7 @@
                                     </a>
                                     <a href="{{$thread->path()}}">
                                         {{ $thread->replies_count }} {{ Str::plural('reply', $thread->replies_count) }}
-                                        @if ($thread->hasUpdatesFor(auth()->user()))
+                                        @if (auth()->check() && $thread->hasUpdatesFor(auth()->user()))
                                             <strong>
                                                 {{ $thread->title }}
                                             </strong>
