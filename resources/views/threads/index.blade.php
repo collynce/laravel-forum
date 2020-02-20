@@ -17,6 +17,13 @@
                                     </a>
                                     <a href="{{$thread->path()}}">
                                         {{ $thread->replies_count }} {{ Str::plural('reply', $thread->replies_count) }}
+                                        @if ($thread->hasUpdatesFor(auth()->user()))
+                                            <strong>
+                                                {{ $thread->title }}
+                                            </strong>
+                                        @else
+                                            {{ $thread->title }}
+                                        @endif
                                     </a>
                                 </h4>
                                 <div class="body">
