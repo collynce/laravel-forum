@@ -22,18 +22,20 @@ class RepliesController extends Controller
 
     public function store($channelId, Thread $thread, Spam $spam)
     {
-        $this->validateReply();
-        $reply = $thread->addReply([
-            'body' => request('body'),
-            'user_id' => auth()->id()
-        ]);
+        try {
+            $this->validateReply();
 
-        if (request()->expectsJson()) {
-            return $reply->load('owner');
+            $reply = $thread->addReply([
+                'body' => request('body'),
+                'user_id' => auth()->id()
+            ]);
+        } catch (\Exception $e) {
+            return response(
+                'Sorry, your reply could not be saved at this time.', 422
+            );
         }
 
-
-        return back()->with('flash', 'Your reply has been left.');
+        return $reply->load('owner');
     }
 
     public function destroy(Reply $reply)
@@ -51,11 +53,15 @@ class RepliesController extends Controller
 
     public function update(Reply $reply)
     {
-        $this->authorize('update', $reply);
+        try {
+            $this->validateReply();
 
-        $this->validateReply();
-
-        $reply->update(request(['body']));
+            $reply->update(request(['body']));
+        } catch (\Exception $e) {
+            return response(
+                'Sorry, your reply could not be saved at this time.', 422
+            );
+        }
     }
 
     protected function validateReply()
